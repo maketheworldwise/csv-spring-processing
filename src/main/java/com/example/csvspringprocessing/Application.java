@@ -2,7 +2,6 @@ package com.example.csvspringprocessing;
 
 import com.example.csvspringprocessing.config.MyProperties;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -10,7 +9,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @Slf4j
 @EnableConfigurationProperties({MyProperties.class})
 @SpringBootApplication
-public class CsvSpringProcessingApplication {
+public class Application {
 
     public static final String APPLICATION_LOCATIONS = "" +
             "classpath:application.yml," +
@@ -18,7 +17,7 @@ public class CsvSpringProcessingApplication {
 
     public static void main(String[] args) {
         // SpringApplication.run(CsvSpringProcessingApplication.class, args);
-        new SpringApplicationBuilder(CsvSpringProcessingApplication.class)
+        new SpringApplicationBuilder(Application.class)
                 .profiles(APPLICATION_LOCATIONS)
                 .run(args);
 

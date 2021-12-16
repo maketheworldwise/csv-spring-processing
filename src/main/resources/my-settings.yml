@@ -1,0 +1,15 @@
+
+my:
+  path:
+    # openCsv 읽기 테스트용 파일
+    read: "/read.csv"
+    # openCsv 쓰기 테스트용 파일
+    write: "/write.csv"
+    # 다운로드할 경로
+    download: "output.csv"
+
+  uri:
+    # https://[s3 버킷명].s3.[리전].amazonaws.com/
+    s3: "https://s3-image.s3.ap-northeast-2.amazonaws.com/"
+    # https://[cdn]/
+    cdn: "https://cdn-image/"
