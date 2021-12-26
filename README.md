@@ -6,8 +6,6 @@
   </a>
 </p>
 
-# 현재 수정중입니다.
-
 > CSV 데이터(이미지명)를 이용하여 S3와 CDN의 URI을 만들고 새로운 CSV 파일에 필드로 넣어 다운받는 개인용 CSV 전처리기 프로젝트입니다. 자세한 내용은 홈페이지를 참고해주세요!
 
 ### 🏠 [Homepage](https://velog.io/@maketheworldwise/CSV-%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%97%90-%EB%AC%B8%EC%9E%90%EC%97%B4-%EC%B6%94%EA%B0%80%ED%95%B4%EC%A3%BC%EA%B8%B0)
@@ -27,12 +25,9 @@ JDK 8
 ```yml
 my:
   path:
-    # openCsv 읽기 테스트용 파일
-    read: "/read.csv"
-    # openCsv 쓰기 테스트용 파일
-    write: "/write.csv"
-    # 다운로드할 경로
-    download: "output.csv"
+    read: "/openCsv 읽기 테스트용 파일.csv"
+    write: "/openCsv 쓰기 테스트용 파일.csv"
+    download: "다운로드할 경로.csv"
 
   uri:
     # https://[s3 버킷명].s3.[리전].amazonaws.com/
@@ -65,7 +60,7 @@ API 설명
 ## 🤝 Contributing
 
 이슈와 새로운 기능에 대한 요청은 언제든지 환영합니다!<br />
-이슈에 대한 내용은 [이슈 가이드]()를 참고해주세요. 기여 방법에 대한 내용은 [기여 가이드]()를 참고해주세요.
+이슈에 대한 내용은 [이슈 가이드](.github/ISSUE_TEMPLATE.md)를 참고해주세요. 기여 방법에 대한 내용은 [기여 가이드](.github/PULL_REQUEST_TEMPLATE.md)를 참고해주세요.
 
 ## Show your support
 
