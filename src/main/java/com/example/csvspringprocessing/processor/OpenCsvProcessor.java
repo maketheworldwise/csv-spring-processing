@@ -10,25 +10,27 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvValidationException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
+@RequiredArgsConstructor
+@Component
 public class OpenCsvProcessor {
 
-    private final MyProperties myProperties = new MyProperties();
+    private final MyProperties myProperties;
 
     // 읽기 테스트
     public void readTest() {
         try {
-            CSVReader csvReader = new CSVReaderBuilder(new FileReader(myProperties.getPath().getRead()))
+            File input = new File(myProperties.getPaths().getRead());
+            CSVReader csvReader = new CSVReaderBuilder(new FileReader(input))
                     .withSkipLines(1)
                     .build();
 
@@ -52,7 +54,7 @@ public class OpenCsvProcessor {
     // 쓰기 테스트
     public void writeTest() {
         try {
-            CSVWriter csvWriter = new CSVWriter(new FileWriter(myProperties.getPath().getWrite()));
+            CSVWriter csvWriter = new CSVWriter(new FileWriter(myProperties.getPaths().getWrite()));
             String[] entries = new String[]{"test1", "test2"};
             csvWriter.writeNext(entries);
             csvWriter.close();
@@ -81,11 +83,11 @@ public class OpenCsvProcessor {
 
     private void write(List<OpenCsvReadDto> csvDataList) {
         try {
-            FileWriter writer = new FileWriter(myProperties.getPath().getDownload());
+            FileWriter writer = new FileWriter(myProperties.getPaths().getDownload());
             StatefulBeanToCsv<OpenCsvWriteDto> beanToCsv = new StatefulBeanToCsvBuilder<OpenCsvWriteDto>(writer).build();
             beanToCsv.write(
                     csvDataList.stream()
-                            .map(x -> new OpenCsvWriteDto(x, myProperties.getUri().getS3(), myProperties.getUri().getCdn()))
+                            .map(x -> new OpenCsvWriteDto(x, myProperties.getUris().getS3(), myProperties.getUris().getCdn()))
                             .collect(Collectors.toList()));
             writer.close();
         } catch (Exception e) {
