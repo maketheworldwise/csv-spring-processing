@@ -1,31 +1,31 @@
 package com.example.csvspringprocessing.config;
 
 import lombok.Getter;
-import lombok.Setter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.context.properties.ConstructorBinding;
 
 @Getter
-@Setter
-@Configuration
+@RequiredArgsConstructor
+@ConstructorBinding
 @ConfigurationProperties("my")
-public class MyProperties {
+public final class MyProperties {
 
-    private Path path;
-    private Uri uri;
+    private final Paths paths;
+    private final Uris uris;
 
     @Getter
-    @Setter
-    public final static class Path {
-        private String read;
-        private String write;
-        private String download;
+    @RequiredArgsConstructor
+    public static final class Paths {
+        private final String read;
+        private final String write;
+        private final String download;
     }
 
     @Getter
-    @Setter
-    public final static class Uri {
-        private String s3;
-        private String cdn;
+    @RequiredArgsConstructor
+    public static final class Uris {
+        private final String s3;
+        private final String cdn;
     }
 }

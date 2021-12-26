@@ -1,7 +1,6 @@
 package com.example.csvspringprocessing.interfaces;
 
-import com.example.csvspringprocessing.processor.CustomCsvProcessor;
-import com.example.csvspringprocessing.processor.OpenCsvProcessor;
+import com.example.csvspringprocessing.application.CsvProcessorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 public class CsvProcessorController {
 
+    private final CsvProcessorService csvProcessorService;
+
     @GetMapping("/test")
     public String test() {
         return "test";
@@ -23,7 +24,7 @@ public class CsvProcessorController {
     // 직접 구현
     @PostMapping("/custom-csv/processing")
     public ResponseEntity<?> csvCustomProcessing(@RequestParam(value = "file") MultipartFile file) {
-        CustomCsvProcessor customCsvProcessor = new CustomCsvProcessor();
+        csvProcessorService.customProcessor(file);
         return new ResponseEntity<>(
                 "성공적으로 변환에 성공하였습니다.",
                 HttpStatus.OK);
@@ -32,9 +33,7 @@ public class CsvProcessorController {
     // OpenCsv 라이브러리 테스트
     @PostMapping("/open-csv/processing/test")
     public ResponseEntity<?> openCsvCustomProcessingTest() {
-        OpenCsvProcessor openCsvProcessor = new OpenCsvProcessor();
-        openCsvProcessor.readTest();
-        openCsvProcessor.writeTest();
+        csvProcessorService.openCsvProcessorTest();
         return new ResponseEntity<>(
                 "성공적으로 테스트하였습니다.",
                 HttpStatus.OK);
@@ -43,8 +42,7 @@ public class CsvProcessorController {
     // OpenCsv 라이브러리
     @PostMapping("/open-csv/processing")
     public ResponseEntity<?> openCsvCustomProcessing(@RequestParam(value = "file") MultipartFile file) {
-        OpenCsvProcessor openCsvProcessor = new OpenCsvProcessor();
-        openCsvProcessor.readAndWrite(file);
+        csvProcessorService.openCsvProcessor(file);
         return new ResponseEntity<>(
                 "성공적으로 변환에 성공하였습니다.",
                 HttpStatus.OK);

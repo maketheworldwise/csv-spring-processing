@@ -2,7 +2,9 @@ package com.example.csvspringprocessing.processor;
 
 import com.example.csvspringprocessing.config.MyProperties;
 import com.example.csvspringprocessing.dto.CustomCsvDto;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
@@ -10,9 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
+@RequiredArgsConstructor
+@Component
 public class CustomCsvProcessor {
 
-    private final MyProperties myProperties = new MyProperties();
+    private final MyProperties myProperties;
 
     private List<CustomCsvDto> read(MultipartFile file) {
         try {
@@ -42,7 +46,7 @@ public class CustomCsvProcessor {
     private void write(List<CustomCsvDto> csvDataList) {
 
         try {
-            File output = new File(myProperties.getPath().getDownload());
+            File output = new File(myProperties.getPaths().getDownload());
             BufferedWriter bw = new BufferedWriter(new FileWriter(output, false));
 
             boolean isHeader = true;
@@ -59,8 +63,8 @@ public class CustomCsvProcessor {
                 sb.append(data.getName()).append(",");
                 sb.append(data.getTitle()).append(",");
                 sb.append(data.getContent()).append(",");
-                sb.append(myProperties.getUri().getS3()).append(data.getName()).append(",");
-                sb.append(myProperties.getUri().getCdn()).append(data.getName());
+                sb.append(myProperties.getUris().getS3()).append(data.getName()).append(",");
+                sb.append(myProperties.getUris().getCdn()).append(data.getName());
 
                 bw.write(sb.toString());
                 bw.newLine();
