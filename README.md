@@ -45,7 +45,13 @@ http://127.0.0.1:8081
 ## Run tests
 
 ```sh
-API 설명
+[GET] 127.0.0.1:8081/custom-csv/processing
+- RequestParameter : Multipartfile file
+
+[GET] 127.0.0.1:8081/open-csv/processing/test
+
+[GET] 127.0.0.1:8081/open-csv/processing
+- RequestParameter : Multipartfile file
 ```
 
 ## Author
