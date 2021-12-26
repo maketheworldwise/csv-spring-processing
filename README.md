@@ -24,12 +24,12 @@ JDK 8
 
 ```yml
 my:
-  path:
+  paths:
     read: "/openCsv 읽기 테스트용 파일.csv"
     write: "/openCsv 쓰기 테스트용 파일.csv"
     download: "다운로드할 경로.csv"
 
-  uri:
+  uris:
     # https://[s3 버킷명].s3.[리전].amazonaws.com/
     s3: "https://s3-image.s3.ap-northeast-2.amazonaws.com/"
     # https://[cdn]/
